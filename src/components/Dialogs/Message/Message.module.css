@@ -1,0 +1,14 @@
+.message {
+  padding: 10px;
+}
+
+.message.my {
+  color: rgb(0, 60, 128);
+  font-weight: bold;
+  margin-left: 70%;
+}
+
+.message.other {
+  color: rgb(43, 226, 226);
+  font-weight: bold;
+}

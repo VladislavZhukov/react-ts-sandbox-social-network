@@ -1,0 +1,5 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  font: 12pt/16pt sans-serif;
+}

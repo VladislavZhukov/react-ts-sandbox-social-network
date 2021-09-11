@@ -1,0 +1,16 @@
+.item {
+  font: 12pt/10pt sans-serif;
+}
+
+.userAvatar {
+  width: 100px;
+  height: 100px;
+}
+
+.selectedPage {
+  font-weight: bold;
+}
+
+.noSelectedPage {
+  cursor: pointer;
+}

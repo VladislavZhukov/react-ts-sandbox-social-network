@@ -1,0 +1,27 @@
+.navigation {
+    grid-area: n;
+    background-color: rgb(78, 87, 212);   
+    margin-right: 5px;
+    padding: 10px;
+  }
+.item a {
+  color: rgb(251, 255, 0);
+  text-decoration: none;
+  font-weight: bold;  
+}
+
+.item a.active {
+  color: rgb(255, 16, 16);
+}
+
+.item.settings {
+  color: rgb(71, 71, 71);
+  font-weight: bolder;
+}
+
+.friends {
+  margin-top: 40%;
+  font-size: 20px;
+  color: rgb(251, 255, 0);
+  font-weight: bolder;
+}

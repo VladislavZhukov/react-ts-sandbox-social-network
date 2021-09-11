@@ -1,0 +1,16 @@
+.items a{
+  text-decoration: none;
+  color: #fbed1e;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/*.items a.active {
+  color: #0038f2;
+}*/
+
+.items img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
