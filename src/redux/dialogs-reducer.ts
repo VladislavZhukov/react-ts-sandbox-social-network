@@ -1,22 +1,23 @@
-const ADD_MESSAGE = "sandbox_network/dialogs/ADD-MESSAGE";
+const ADD_MESSAGE = "sandbox_network/dialogs/ADD-MESSAGE"
 
-type MessageType = {
-    id: number,
-    content: string,
+type MessageT = {
+    id: number
+    content: string
     myMessage: boolean
 }
-type DialogType = {
-    id: number,
+type DialogT = {
+    id: number
     name: string
 }
-type MessageData = Array<MessageType>
-type DialogsData = Array<DialogType>
-type InitialStateType = {
-    messagesData: MessageData,
-    dialogsData: DialogsData
+export type MessageDataT = Array<MessageT>
+export type DialogsDataT = Array<DialogT>
+type InitialStateT = {
+    messagesData: MessageDataT
+    dialogsData: DialogsDataT
+    newMessageText: string
 }
 
-let initialState: InitialStateType = {
+let initialState: InitialStateT = {
     messagesData: [
         { id: 1, content: "Hi", myMessage: true },
         { id: 2, content: "how is the dude himself? =))", myMessage: true },
@@ -32,10 +33,11 @@ let initialState: InitialStateType = {
         { id: 3, name: "Stepan" },
         { id: 4, name: "Viktoria" },
         { id: 5, name: "Tolik" },
-    ]
-};
+    ],
+    newMessageText: ""
+}
 
-let dialogsReducer = (state = initialState, action: any): InitialStateType => {
+let dialogsReducer = (state = initialState, action: ActionT): InitialStateT => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage = {
@@ -50,14 +52,14 @@ let dialogsReducer = (state = initialState, action: any): InitialStateType => {
         default:
             return state;
     }
-};
-
-type AddMessageActionType = {
+}
+//ActionCreatorType
+type ActionT = AddMessageActionT
+type AddMessageActionT = {
     type: typeof ADD_MESSAGE,
     newMessageText: string
 }
-
 //ActionCreator
-export const addMessage = (newMessageText: string): AddMessageActionType => ({ type: ADD_MESSAGE, newMessageText });
+export const addMessage = (newMessageText: string): AddMessageActionT => ({ type: ADD_MESSAGE, newMessageText })
 
 export default dialogsReducer;

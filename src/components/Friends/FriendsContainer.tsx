@@ -2,8 +2,10 @@
 import React from "react"
 import { compose } from "redux"
 import { connect } from "react-redux"
+//COMPONENT
+import Friends from "./Friends"
 //TYPES
-import { FriendType } from "../../types/types"
+import { FriendT } from "../../types/types"
 import { AppStateT } from "../../redux/store-redux"
 //SELECTORS
 import {
@@ -16,41 +18,38 @@ import {
 } from "../../redux/friends-selectors"
 //HOC
 import { withAuthRedirect } from "../../hoc/withAuthRedirect"
-//my libs
-import Friends from "./Friends"
-import Preloader from "../Common/Preloader/Preloader"
+//REDUCER
 import { follow, unfollow, getFriends } from "../../redux/friends-reducer"
+//my libs
+import Preloader from "../Common/Preloader/Preloader"
 
 type MapStatePropsT = {
   pageSize: number
   currentPage: number
   isFetching: boolean
-  friendsData: Array<FriendType>
+  friendsData: Array<FriendT>
   totalFriendsCount: number
   followingInProgress: Array<number>
 }
-
 type MapDispatchPropsT = {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
   getFriends: (currentPage: number, pageSize: number) => void
 }
-
 type OwnPropsT = {
   pageTitle: string
 }
-
 type PropsT = MapStatePropsT & MapDispatchPropsT & OwnPropsT
 
 class FriendsContainer extends React.Component<PropsT> {
   componentDidMount() {
-    const { currentPage, pageSize } = this.props;
-    this.props.getFriends(currentPage, pageSize);
+    const { currentPage, pageSize } = this.props
+    this.props.getFriends(currentPage, pageSize)
   }
 
   onPageChanged = (pageNumber: number) => {
-    const { pageSize } = this.props;
-    this.props.getFriends(pageNumber, pageSize);
+    const { pageSize } = this.props
+    this.props.getFriends(pageNumber, pageSize)
   };
 
   render() {
@@ -69,7 +68,7 @@ class FriendsContainer extends React.Component<PropsT> {
           onPageChanged={this.onPageChanged}
         />
       </>
-    );
+    )
   }
 }
 
@@ -81,18 +80,18 @@ const mapStateToProps = (state: AppStateT): MapStatePropsT => {
     currentPage: getCurrentPage(state),
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
-  };
-};
+  }
+}
 
 const mapDispatchToProps: MapDispatchPropsT = {
   follow,
   unfollow,
   getFriends
-};
+}
 
 export default compose(
   connect<MapStatePropsT, MapDispatchPropsT, OwnPropsT, AppStateT>(
     mapStateToProps,
     mapDispatchToProps),
   withAuthRedirect
-)(FriendsContainer);
+)(FriendsContainer)

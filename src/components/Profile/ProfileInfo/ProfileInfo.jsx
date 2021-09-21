@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import Preloader from "../../Common/Preloader/Preloader";
 import pim from "./ProfileInfo.module.css";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 import avaUser from "../../../assets/images/avaFriendsDefault.jpg";
 import ProfileData from "./ProfileData/ProfileData";
 import ProfileDataReduxForm from "./ProfileDataEditForm/ProfileDataEditForm";
+import { ProfileT } from "../../../types/types";
+
+// type ProfileInfoT = {
+//   profile: ProfileT
+//   status: string
+//   isOwner: boolean
+
+//   updateStatus: (status: string) => void
+//   savePhoto: (file: any) => void
+//   saveProfile: (updatedProfile: ProfileT) => { messages: string }
+// }FC<ProfileInfoT>
 
 const ProfileInfo = React.memo(
   ({

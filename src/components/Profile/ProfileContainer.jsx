@@ -12,6 +12,23 @@ import { withRouter } from "react-router";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect.js";
 import { compose } from "redux";
 
+// type MapStateToPropsT = {
+//   profile: ProfileType | null
+//   status: string | null
+//   authUserId: number | null
+//   isAuth: boolean
+// }
+
+// type mapDispatchToPropsT = {
+//   getProfile: (userId: number) => void
+//   getStatus: (userId: number) => void
+//   updateStatus: (status: string) => void
+//   savePhoto: (file: any) => void
+//   saveProfile: (updatedProfile: ProfileType) => void
+// }
+
+// type PropsT = MapStateToPropsT & mapDispatchToPropsT
+
 class ProfileContainer extends React.Component {
   refreshProfile() {
     let userId = this.props.match.params.userId;

@@ -1,15 +1,16 @@
 //CORE
 import { FC } from "react"
 //TYPES
-import { FriendType } from "../../types/types"
-//my libs
+import { FriendT } from "../../types/types"
+//COMPONENT
 import Friend from "./Friend"
+//my libs
 import Pagination from "../Common/Pagination/Pagination"
 
 type PropsT = {
   pageSize?: number
   currentPage: number
-  friendsData: Array<FriendType>
+  friendsData: Array<FriendT>
   totalFriendsCount: number
   followingInProgress: Array<number>
 
@@ -32,24 +33,24 @@ let Friends: FC<PropsT> = ({
     <div>
       <div>
         <Pagination
-          totalFriendsCount={totalFriendsCount}
-          currentPage={currentPage}
-          onPageChanged={onPageChanged}
           pageSize={pageSize}
+          currentPage={currentPage}
+          totalFriendsCount={totalFriendsCount}
+          onPageChanged={onPageChanged}
         />
       </div>
       {friendsData.map((f) => (
         <Friend
-          friend={f}
-          key={f.id}
           id={f.id}
+          key={f.id}
+          friend={f}
           followingInProgress={followingInProgress}
           follow={follow}
           unfollow={unfollow}
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Friends;
+export default Friends

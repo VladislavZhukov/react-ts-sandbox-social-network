@@ -1,20 +1,18 @@
-type FriendsType = {
-  id: number,
-  name: string
-}
+//TYPES
+import { BestFriendsT } from "../types/types";
 
 let initialState = {
   friends: [
     { id: 1, name: "Viktor" },
     { id: 2, name: "Sveta" },
     { id: 3, name: "Jojo" },
-  ] as Array<FriendsType>,
-};
+  ] as Array<BestFriendsT>,
+}
 
-type InitialStateType = typeof initialState
+type InitialStateT = typeof initialState
 
-const navBarReducer = (state = initialState, action: any): InitialStateType => {
-  return state;
-};
+const navBarReducer = (state = initialState, action: any): InitialStateT => {
+  return state
+}
 
-export default navBarReducer;
+export default navBarReducer

@@ -1,5 +1,5 @@
 import React from "react";
-import MyPostsContainer from "./MyPosts/MyPostsContainer.jsx";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo.jsx";
 
 const Profile = React.memo((props) => {

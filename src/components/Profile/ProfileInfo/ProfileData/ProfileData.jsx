@@ -1,6 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
+import { ContactsT, ProfileT } from "../../../../types/types";
 import Contact from "./Contact/Contact";
 import pd from "./ProfileData.module.css";
+
+// type ProfileDataT = {
+//   profile: ProfileT
+//   isOwner: boolean
+//   goToEditMode: any
+// }  FC<ProfileDataT>
+
 
 const ProfileData = React.memo(({ profile, isOwner, goToEditMode }) => {
   return (

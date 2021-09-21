@@ -1,34 +1,41 @@
-export type PostsDataType = {
-    id: number,
-    message: string,
+export type PostsDataT = {
+    id: number
+    message: string
     likeCounter: number
 }
-export type ContactsType = {
-    github: string,
-    vk: string,
-    facebook: string,
-    instagram: string,
-    twitter: string,
-    website: string,
-    youtube: string,
+export type ContactsT = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
     mainLink: string
 }
-export type PhotosType = {
-    small: string | null,
+export type PhotosT = {
+    small: string | null
     large: string | null
 }
-export type ProfileType = {
-    userId: any,
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    contacts: ContactsType,
-    photos: PhotosType
+
+export type ProfileT = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe: string
+    fullName: string
+    contacts: ContactsT
+    photos: PhotosT
 }
-export type FriendType = {
-    id: number,
-    name: string,
-    status: string,
-    photos: PhotosType,
+export type FriendT = {
+    id: number
+    name: string
+    status: string
+    photos: PhotosT
     followed: boolean
+}
+
+export type BestFriendsT = {
+    id: number
+    name: string
 }
