@@ -3,7 +3,7 @@ import { FC } from "react"
 //STYLES
 import dm from "./Dialogs.module.css"
 //TYPES
-import { DialogsDataT, MessageDataT } from "../../redux/dialogs-reducer"
+import { DialogsDataT, MessageDataT } from "../../types/types"
 //COMPONENTS
 import Message from "./Message/Message"
 import DialogItem from "./DialogItem/DialogItem"

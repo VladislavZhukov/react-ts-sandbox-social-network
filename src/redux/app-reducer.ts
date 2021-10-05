@@ -1,23 +1,16 @@
-//CORE
-import { ThunkAction } from "redux-thunk"
 //TYPE
-import { AppStateT } from "./store-redux"
+import { InferActionsType } from "./store-redux"
+import { BaseThunkType } from './store-redux'
 //other reducer
 import { getAuthUserData } from "./auth-reducer"
 
-const SET_INITIALIZED_SUCCESS = "sandbox_network/app/SET_INITIALIZED_SUCCESS"
-
-type InitialStateT = {
-    initialized: boolean
-}
-
-let initialState: InitialStateT = {
+let initialState = {
     initialized: false
 }
 
 let appReducer = (state = initialState, action: ActionT): InitialStateT => {
     switch (action.type) {
-        case SET_INITIALIZED_SUCCESS:
+        case "SN/APP/SET_INITIALIZED_SUCCESS":
             return {
                 ...state,
                 initialized: true
@@ -26,22 +19,19 @@ let appReducer = (state = initialState, action: ActionT): InitialStateT => {
             return state;
     }
 }
-//ActionCreatorType
-type ActionT = SetInitializedSuccessActionT
-type SetInitializedSuccessActionT = {
-    type: typeof SET_INITIALIZED_SUCCESS
-}
 //ActionCreator
-export const setInitializedSuccess = (): SetInitializedSuccessActionT => ({
-    type: SET_INITIALIZED_SUCCESS
-})
-//ThunkCreatorType
-type ThunkT = ThunkAction<Promise<void>, AppStateT, unknown, ActionT>
+export const actions = {
+    setInitializedSuccess: () => ({ type: "SN/APP/SET_INITIALIZED_SUCCESS" } as const)
+}
 //ThunkCreator
 export const initializeApp = (): ThunkT => async (dispatch) => {
     let promise = dispatch(getAuthUserData())
     await Promise.all([promise])
-    dispatch(setInitializedSuccess())
+    dispatch(actions.setInitializedSuccess())
 }
 
 export default appReducer
+
+type InitialStateT = typeof initialState
+type ActionT = InferActionsType<typeof actions>
+type ThunkT = BaseThunkType<ActionT>

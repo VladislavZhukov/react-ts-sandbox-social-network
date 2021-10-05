@@ -11,6 +11,7 @@ import Preloader from "./components/Common/Preloader/Preloader";
 import { getInitialized } from "./redux/app-selectors";
 import store from "./redux/store-redux";
 import { withSuspense } from "./hoc/withSuspense";
+import ComposeTest from "./example/2/СomposeTest";
 const News = React.lazy(() => import("./components/News/News"));
 const Music = React.lazy(() => import("./components/Music/Music"));
 const Settings = React.lazy(() => import("./components/Settings/Settings"));
@@ -38,6 +39,8 @@ class App extends React.Component {
           <Route exact path="/music" component={withSuspense(Music)} />
           <Route exact path="/settings" component={withSuspense(Settings)} />
           <Route path="/login" render={withSuspense(LoginContainer)} />
+
+          <Route path="/test" render={ComposeTest} />
         </div>
       </div>
     );

@@ -1,5 +1,3 @@
-export type OH = {}
-
 const obj = {
     a: { name: "BossBravo" },
     b: { age: 140 },
@@ -54,3 +52,5 @@ const actions = {
     AC1: (age: number) => ({ type: 'SET-AGE', age } as const),
     AC2: (firstName: string, lastName: string) => ({ type: 'SET-FULL-NAME', firstName, lastName } as const)
 }
+
+export {}

@@ -1,5 +1,3 @@
-export type OH = {}
-
 type UserT = {
     firstName: string
     lastName: string
@@ -37,3 +35,5 @@ const reducer = (state: StateT = initial, action: ActionsT) => {
 
 const AC1 = (age: number) => ({ type: 'SET-AGE', age } as const)
 const AC2 = (firstName: string, lastName: string) => ({ type: 'SET-FULL-NAME', firstName, lastName } as const)
+
+export {}

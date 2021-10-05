@@ -9,10 +9,10 @@ let initialState = {
   ] as Array<BestFriendsT>,
 }
 
-type InitialStateT = typeof initialState
-
-const navBarReducer = (state = initialState, action: any): InitialStateT => {
+const navBarReducer = (state = initialState): InitialStateT => {
   return state
 }
 
 export default navBarReducer
+
+type InitialStateT = typeof initialState

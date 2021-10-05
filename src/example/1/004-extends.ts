@@ -1,5 +1,3 @@
-export type OH = {}
-
 type UserT = {
     firstName: string
     lastName: string
@@ -24,3 +22,5 @@ let b: JediKnight<'photo'> = {
     large: 'https://jediHousingMaintenanceOffice/archive/JohnJohnson-4.jpg',
     small: 'https://jediHousingMaintenanceOffice/archive/JohnJohnson-4.jpg'
 }
+
+export {}

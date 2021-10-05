@@ -1,5 +1,3 @@
-export type OH = {}
-
 type UserT = {
     firstName: string
     lastName: string
@@ -35,3 +33,5 @@ const response2: ServerResponseT<PhotoT> = {
         small: '2000'
     }
 }
+
+export {}

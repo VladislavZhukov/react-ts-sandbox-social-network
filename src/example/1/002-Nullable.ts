@@ -1,5 +1,3 @@
-export type OH = {}
-
 type UserT = {
     firstName: string
     lastName: string
@@ -19,3 +17,5 @@ const initial = {
     user: null as UserT | null,
     photo: null as NullableT<PhotoT>
 }
+
+export {}

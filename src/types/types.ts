@@ -17,7 +17,6 @@ export type PhotosT = {
     small: string | null
     large: string | null
 }
-
 export type ProfileT = {
     userId: number
     lookingForAJob: boolean
@@ -34,8 +33,18 @@ export type FriendT = {
     photos: PhotosT
     followed: boolean
 }
-
 export type BestFriendsT = {
     id: number
     name: string
 }
+export type MessageT = {
+    id: number
+    content: string
+    myMessage: boolean
+}
+export type DialogT = {
+    id: number
+    name: string
+}
+export type MessageDataT = Array<MessageT>
+export type DialogsDataT = Array<DialogT>

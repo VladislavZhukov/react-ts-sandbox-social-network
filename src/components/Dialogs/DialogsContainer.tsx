@@ -8,7 +8,8 @@ import Dialogs from "./Dialogs"
 //HOC
 import { withAuthRedirect } from "../../hoc/withAuthRedirect"
 //REDUCER
-import { addMessage, DialogsDataT, MessageDataT } from "../../redux/dialogs-reducer"
+import { actions } from "../../redux/dialogs-reducer"
+import { DialogsDataT, MessageDataT } from "../../types/types"
 
 
 type MapStateToPropsT = {
@@ -17,8 +18,11 @@ type MapStateToPropsT = {
   newMessageText: string
 }
 type MapDispatchPropsT = {
-  addMessage: (newMessageText: string) => void
+  actions: {
+    addMessage: (newMessageText: string) => void
+  }
 }
+
 
 const mapStateToProps = (state: AppStateT): MapStateToPropsT => {
   return {
@@ -29,7 +33,7 @@ const mapStateToProps = (state: AppStateT): MapStateToPropsT => {
 }
 
 const mapDispatchToProps: MapDispatchPropsT = {
-  addMessage
+  actions
 }
 
 export default compose(
