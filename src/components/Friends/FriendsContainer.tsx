@@ -1,5 +1,5 @@
 //CORE
-import React from "react"
+import React, { ComponentType } from "react"
 import { compose } from "redux"
 import { connect } from "react-redux"
 //COMPONENT
@@ -22,24 +22,6 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect"
 import { follow, unfollow, getFriends } from "../../redux/friends-reducer"
 //my libs
 import Preloader from "../Common/Preloader/Preloader"
-
-type MapStatePropsT = {
-  pageSize: number
-  currentPage: number
-  isFetching: boolean
-  friendsData: Array<FriendT>
-  totalFriendsCount: number
-  followingInProgress: Array<number>
-}
-type MapDispatchPropsT = {
-  follow: (userId: number) => void
-  unfollow: (userId: number) => void
-  getFriends: (currentPage: number, pageSize: number) => void
-}
-type OwnPropsT = {
-  pageTitle: string
-}
-type PropsT = MapStatePropsT & MapDispatchPropsT & OwnPropsT
 
 class FriendsContainer extends React.Component<PropsT> {
   componentDidMount() {
@@ -89,9 +71,27 @@ const mapDispatchToProps: MapDispatchPropsT = {
   getFriends
 }
 
-export default compose(
+export default compose<ComponentType<OwnPropsT>>(
   connect<MapStatePropsT, MapDispatchPropsT, OwnPropsT, AppStateT>(
     mapStateToProps,
     mapDispatchToProps),
   withAuthRedirect
 )(FriendsContainer)
+
+type MapStatePropsT = {
+  pageSize: number
+  currentPage: number
+  isFetching: boolean
+  friendsData: Array<FriendT>
+  totalFriendsCount: number
+  followingInProgress: Array<number>
+}
+type MapDispatchPropsT = {
+  follow: (userId: number) => void
+  unfollow: (userId: number) => void
+  getFriends: (currentPage: number, pageSize: number) => void
+}
+type OwnPropsT = {
+  pageTitle: string
+}
+type PropsT = MapStatePropsT & MapDispatchPropsT & OwnPropsT

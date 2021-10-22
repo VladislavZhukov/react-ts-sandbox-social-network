@@ -23,7 +23,8 @@ const mapStateToProps = (state: AppStateT): MapStateToPropsT => {
 
 const mapDispatchToProps: MapDispatchPropsT = {
   addPost
-};
-const MyPostsContainer = connect<MapStateToPropsT, MapDispatchPropsT, {}, AppStateT>(mapStateToProps, mapDispatchToProps)(MyPosts);
+}
+const MyPostsContainer = connect<MapStateToPropsT, MapDispatchPropsT, {}, AppStateT>(
+  mapStateToProps, mapDispatchToProps)(MyPosts)
 
-export default MyPostsContainer;
+export default MyPostsContainer

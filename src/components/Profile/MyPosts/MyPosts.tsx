@@ -1,19 +1,10 @@
-import React, { FC } from "react";
-import { PostsDataT } from "../../../types/types";
-import mpm from "./MyPosts.module.css";
-import MyPostsReduxForm from "./MyPostsReduxForm/MyPostsReduxForm";
-import PublishedPost from "./PublishedPost/PublishedPost";
+import { FC, memo } from "react"
+import { PostsDataT } from "../../../types/types"
+import mpm from "./MyPosts.module.css"
+import MyPostsReduxForm, { MyPostsFormT } from "./MyPostsReduxForm/MyPostsReduxForm"
+import PublishedPost from "./PublishedPost/PublishedPost"
 
-type MyPostsT = {
-  postsData: Array<PostsDataT>
-
-  addPost: (myNewPost: string) => void
-}
-export type MyPostsFormT = {
-  myNewPost: string
-}
-
-const MyPosts: FC<MyPostsT> = React.memo(({ postsData, addPost }) => {
+const MyPosts: FC<MyPostsT> = ({ postsData, addPost }) => {
   let publishedPostElements = postsData.map((mp) => (
     <PublishedPost
       key={mp.id}
@@ -39,6 +30,14 @@ const MyPosts: FC<MyPostsT> = React.memo(({ postsData, addPost }) => {
       {publishedPostElements}
     </div>
   )
-})
+}
 
-export default MyPosts
+const MyPostMemo = memo(MyPosts)
+
+export default MyPostMemo
+
+type MyPostsT = {
+  postsData: Array<PostsDataT>
+
+  addPost: (myNewPost: string) => void
+}

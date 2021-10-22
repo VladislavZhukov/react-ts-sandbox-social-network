@@ -9,17 +9,6 @@ import Message from "./Message/Message"
 import DialogItem from "./DialogItem/DialogItem"
 import DialogsReduxForm from "./DialogsReduxForm"
 
-type DialogsT = {
-  dialogsData: DialogsDataT
-  messagesData: MessageDataT
-
-  addMessage: (newMessageText: string) => void
-}
-
-export type DialogFormValueT = {
-  myNewMessageText: string
-}
-
 const Dialogs: FC<DialogsT> = ({dialogsData, messagesData, addMessage}) => {
   let dialogsElement = dialogsData.map((d) => (
     <DialogItem key={d.id} name={d.name} id={d.id} />
@@ -48,3 +37,13 @@ const Dialogs: FC<DialogsT> = ({dialogsData, messagesData, addMessage}) => {
 }
 
 export default Dialogs
+
+type DialogsT = {
+  dialogsData: DialogsDataT
+  messagesData: MessageDataT
+
+  addMessage: (newMessageText: string) => void
+}
+export type DialogFormValueT = {
+  myNewMessageText: string
+}

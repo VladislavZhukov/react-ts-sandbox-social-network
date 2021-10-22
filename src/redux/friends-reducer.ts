@@ -7,6 +7,7 @@ import { FriendT } from "../types/types"
 import { friendsAPI } from "../api/friends-api"
 //utils
 import { updateObjectArray } from "../utils/object-helpers"
+import { APIResponseT } from "../api/api"
 
 let initialState = {
     friendsData: [] as Array<FriendT>,
@@ -84,27 +85,29 @@ export const getFriends = (page: number, pageSize: number): ThunkT => {
     }
 }
 export const follow = (id: number): ThunkT => async (dispatch, getState) => {
-    _followUnfollowFlow(dispatch, id, friendsAPI.follow.bind(friendsAPI), actions.followSuccess)
+    await _followUnfollowFlow(dispatch, id, friendsAPI.follow.bind(friendsAPI), actions.followSuccess)
 }
 export const unfollow = (id: number): ThunkT => async (dispatch, getState) => {
-    _followUnfollowFlow(dispatch, id, friendsAPI.unfollow.bind(friendsAPI), actions.unFollowSuccess)
+    await _followUnfollowFlow(dispatch, id, friendsAPI.unfollow.bind(friendsAPI), actions.unFollowSuccess)
 }
 
 export default friendsReducer
 
-type InitialStateT = typeof initialState
+export type InitialStateT = typeof initialState
 type ActionT = InferActionsType<typeof actions>
 type DispatchT = Dispatch<ActionT>
 type ThunkT = BaseThunkType<ActionT>
 
 //COMMON FUNCTIONS
-const _followUnfollowFlow = async (dispatch: DispatchT, id: number, apiMethod: any,
+const _followUnfollowFlow = async (dispatch: DispatchT,
+    userId: number,
+    apiMethod: (userId: number) => Promise<APIResponseT>,
     actionCreator: (userId: number) => ActionT) => {
-    dispatch(actions.toggleFollowingInProgress(true, id))
-    const response = await apiMethod(id)
+    dispatch(actions.toggleFollowingInProgress(true, userId))
+    const response = await apiMethod(userId)
     if (response.resultCode === 0) {
-        dispatch(actions.toggleFollowingInProgress(false, id))
-        dispatch(actionCreator(id))
+        dispatch(actions.toggleFollowingInProgress(false, userId))
+        dispatch(actionCreator(userId))
     }
 }
 

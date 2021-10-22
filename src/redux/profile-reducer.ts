@@ -77,7 +77,7 @@ export const getProfile = (userId: number | null): ThunkT => async (dispatch) =>
     const response = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(response))
 }
-export const getStatus = (userId: number): ThunkT => async (dispatch) => {
+export const getStatus = (userId: number | null): ThunkT => async (dispatch) => {
     const response = await profileAPI.getStatus(userId)
     dispatch(setUserStatus(response))
 }

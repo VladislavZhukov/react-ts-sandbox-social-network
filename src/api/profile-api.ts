@@ -11,7 +11,7 @@ export const profileAPI = {
             .get<ProfileT>(`profile/${userId}`)
         ).then(response => response.data);
     },
-    getStatus(userId: number) {
+    getStatus(userId: number | null) {
         return (instance
             .get<string>(`profile/status/${userId}`)
         ).then(response => response.data);

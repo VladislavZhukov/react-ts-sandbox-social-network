@@ -9,17 +9,6 @@ import Header from "./Header"
 //my libs
 import { logout } from "../../redux/auth-reducer"
 
-type MapStateToPropsT = {
-  isAuth: boolean
-  login: string | null
-}
-
-type mapDispatchToPropsT = {
-  logout: () => void
-}
-
-type PropsT = MapStateToPropsT & mapDispatchToPropsT
-
 class HeaderContainer extends React.Component<PropsT> {
   render() {
     return <Header {...this.props} />
@@ -31,6 +20,16 @@ const mapStateToProps = (state: AppStateT): MapStateToPropsT => ({
 })
 const mapDispatchToProps: mapDispatchToPropsT = { logout }
 
-export default compose(connect<MapStateToPropsT, mapDispatchToPropsT, {}, AppStateT>(mapStateToProps, mapDispatchToProps))(
-  HeaderContainer
-)
+export default compose(connect<MapStateToPropsT, mapDispatchToPropsT, {}, AppStateT>(
+  mapStateToProps, mapDispatchToProps))(HeaderContainer)
+
+type MapStateToPropsT = {
+  isAuth: boolean
+  login: string | null
+}
+
+type mapDispatchToPropsT = {
+  logout: () => void
+}
+
+type PropsT = MapStateToPropsT & mapDispatchToPropsT

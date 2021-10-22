@@ -10,19 +10,7 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect"
 //REDUCER
 import { actions } from "../../redux/dialogs-reducer"
 import { DialogsDataT, MessageDataT } from "../../types/types"
-
-
-type MapStateToPropsT = {
-  dialogsData: DialogsDataT
-  messagesData: MessageDataT
-  newMessageText: string
-}
-type MapDispatchPropsT = {
-  actions: {
-    addMessage: (newMessageText: string) => void
-  }
-}
-
+import { ComponentType } from "react"
 
 const mapStateToProps = (state: AppStateT): MapStateToPropsT => {
   return {
@@ -33,10 +21,19 @@ const mapStateToProps = (state: AppStateT): MapStateToPropsT => {
 }
 
 const mapDispatchToProps: MapDispatchPropsT = {
-  actions
+  addMessage: actions.addMessage
 }
 
-export default compose(
+export default compose<ComponentType>(
   connect<MapStateToPropsT, MapDispatchPropsT, {}, AppStateT>(mapStateToProps, mapDispatchToProps),
   withAuthRedirect
 )(Dialogs)
+
+type MapStateToPropsT = {
+  dialogsData: DialogsDataT
+  messagesData: MessageDataT
+  newMessageText: string
+}
+type MapDispatchPropsT = {
+  addMessage: (newMessageText: string) => void
+}

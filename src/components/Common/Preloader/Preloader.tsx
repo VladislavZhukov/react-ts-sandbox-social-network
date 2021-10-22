@@ -3,10 +3,7 @@ import { FC } from "react"
 //img
 import preloader from "../../../assets/images/preloader.svg"
 
-type PreloaderT = {
-}
-
-let Preloader: FC<PreloaderT> = () => {
+let Preloader: FC = () => {
   return <img src={preloader} alt="preloader..." />
 };
 

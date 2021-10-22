@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import Preloader from "../../Common/Preloader/Preloader";
 import pim from "./ProfileInfo.module.css";
 import ProfileStatusHooks from "./ProfileStatusHooks";
@@ -7,24 +7,24 @@ import ProfileData from "./ProfileData/ProfileData";
 import ProfileDataReduxForm from "./ProfileDataEditForm/ProfileDataEditForm";
 import { ProfileT } from "../../../types/types";
 
-// type ProfileInfoT = {
-//   profile: ProfileT
-//   status: string
-//   isOwner: boolean
+export type ProfileInfoT = {
+  profile: ProfileT | null
+  status: string | null
+  isOwner: boolean
 
-//   updateStatus: (status: string) => void
-//   savePhoto: (file: any) => void
-//   saveProfile: (updatedProfile: ProfileT) => { messages: string }
-// }FC<ProfileInfoT>
+  savePhoto: (file: File) => void
+  updateStatus: (status: string) => void
+  saveProfile: (updatedProfile: ProfileT) => Promise<any>
+}
 
-const ProfileInfo = React.memo(
+const ProfileInfo: FC<ProfileInfoT> = React.memo(
   ({
-    profile,
     status,
-    updateStatus,
+    profile,
     isOwner,
     savePhoto,
     saveProfile,
+    updateStatus,
     ...props
   }) => {
     let [editMode, setEditMode] = useState(false);
@@ -32,12 +32,13 @@ const ProfileInfo = React.memo(
     if (!profile) {
       return <Preloader />;
     } else {
-      const onMainPhotoSelected = (e) => {
-        if (e.target.files.length) {
+      const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.length) {
           savePhoto(e.target.files[0]);
         }
       };
-      const onSubmit = (formData) => {
+      const onSubmit = (formData: ProfileT) => {
+        //TODO remove then
         saveProfile(formData).then(() => {
           setEditMode(false);
         });
@@ -62,8 +63,7 @@ const ProfileInfo = React.memo(
               )}
             </div>
             <ProfileStatusHooks
-              status={status}
-              s
+              status={status === null ? "" : status}
               updateStatus={updateStatus}
               isOwner={isOwner}
             />
@@ -82,9 +82,9 @@ const ProfileInfo = React.memo(
             )}
           </div>
         </div>
-      );
+      )
     }
   }
-);
+)
 
 export default ProfileInfo;

@@ -8,16 +8,7 @@ import { FriendT } from "../../types/types"
 //img
 import avaUser from "../../assets/images/avaFriendsDefault.jpg"
 
-type FriendCT = {
-  id: number
-  friend: FriendT
-  followingInProgress: Array<number>
-
-  follow: (userId: number) => void
-  unfollow: (userId: number) => void
-}
-
-let Friend: FC<FriendCT> = ({ id, friend, follow, unfollow, followingInProgress }) => {
+let Friend: FC<FriendCT> = ({ friend, follow, unfollow, followingInProgress }) => {
   return (
     <div>
       <span>
@@ -67,3 +58,12 @@ let Friend: FC<FriendCT> = ({ id, friend, follow, unfollow, followingInProgress 
 }
 
 export default Friend
+
+type FriendCT = {
+  id: number
+  friend: FriendT
+  followingInProgress: Array<number>
+
+  follow: (userId: number) => void
+  unfollow: (userId: number) => void
+}

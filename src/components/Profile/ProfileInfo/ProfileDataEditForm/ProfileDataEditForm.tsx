@@ -1,26 +1,17 @@
-import React, { FC } from "react";
-import { InjectedFormProps, reduxForm } from "redux-form";
-import { ProfileT } from "../../../../types/types";
+import React, { FC } from "react"
+import { InjectedFormProps, reduxForm } from "redux-form"
+import { ProfileT } from "../../../../types/types"
 import {
   createField,
+  GetStringKeys,
   Input,
   Textarea,
-} from "../../../Common/FormControls/FormControls";
-import style from "../../../Common/FormControls/FormControls.module.css";
+} from "../../../Common/FormControls/FormControls"
+import style from "../../../Common/FormControls/FormControls.module.css"
 
-type ProfileDataEditFormOwnPropsT = {
-  profile: ProfileT
-}
-type ProfileDataEditFormValueT = {
-  fullName: string
-  lookingForAJobDescription: string
-  lookingForAJob: boolean
-  aboutMe: string
-}
 
-type ProfileDataEditFormValueK = Extract<keyof ProfileDataEditFormValueT, string>
 
-const ProfileDataEditForm: FC<InjectedFormProps<ProfileDataEditFormValueT, ProfileDataEditFormOwnPropsT> &
+const ProfileDataEditForm: FC<InjectedFormProps<ProfileT, ProfileDataEditFormOwnPropsT> &
   ProfileDataEditFormOwnPropsT> = React.memo(({ handleSubmit, error, profile }) => {
     return (
       <form onSubmit={handleSubmit}>
@@ -62,10 +53,15 @@ const ProfileDataEditForm: FC<InjectedFormProps<ProfileDataEditFormValueT, Profi
           })}
         </div>
       </form>
-    );
-  });
+    )
+  })
 
-const ProfileDataReduxForm = reduxForm<ProfileDataEditFormValueT, ProfileDataEditFormOwnPropsT>
+const ProfileDataReduxForm = reduxForm<ProfileT, ProfileDataEditFormOwnPropsT>
   ({ form: "editProfile" })(ProfileDataEditForm)
 
-export default ProfileDataReduxForm;
+export default ProfileDataReduxForm
+
+type ProfileDataEditFormOwnPropsT = {
+  profile: ProfileT
+}
+type ProfileDataEditFormValueK = GetStringKeys<ProfileT>

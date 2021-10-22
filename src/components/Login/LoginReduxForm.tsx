@@ -6,18 +6,7 @@ import style from "../Common/FormControls/FormControls.module.css"
 //UTILS
 import { maxLengthCreator, required } from "../../utils/validators/validator"
 //my lib
-import { Input, createField } from "../Common/FormControls/FormControls"
-
-type LoginFormOwnPropsT = {
-  captchaUrl: string | null
-}
-type LoginFormValueT = {
-  email: string
-  password: string
-  rememberMe: boolean
-  captcha: string
-}
-type LoginFormValueK = Extract<keyof LoginFormValueT, string>
+import { Input, createField, GetStringKeys } from "../Common/FormControls/FormControls"
 
 const maxLength50 = maxLengthCreator(50)
 
@@ -50,3 +39,14 @@ const LoginForm: FC<InjectedFormProps<LoginFormValueT, LoginFormOwnPropsT> & Log
 const LoginReduxForm = reduxForm<LoginFormValueT, LoginFormOwnPropsT>({ form: "login" })(LoginForm)
 
 export default LoginReduxForm
+
+type LoginFormOwnPropsT = {
+  captchaUrl: string | null
+}
+type LoginFormValueT = {
+  email: string
+  password: string
+  rememberMe: boolean
+  captcha: string
+}
+type LoginFormValueK = GetStringKeys<LoginFormValueT>

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
 import {
   maxLengthCreator,
@@ -6,20 +6,16 @@ import {
 } from "../../../../utils/validators/validator";
 import { Textarea } from "../../../Common/FormControls/FormControls";
 
-export type MyPostsFormT = {
-  myNewPost: string
-}
-
 const maxLength10 = maxLengthCreator(10);
 
-const MyPostsForm: FC<InjectedFormProps<MyPostsFormT>>  = (props) => {
+const MyPostsForm: FC<InjectedFormProps<MyPostsFormT>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
+          component={Textarea}
           name="myNewPost"
           placeholder={"Enter your new post"}
-          component={Textarea}
           validate={[required, maxLength10]}
         />
       </div>
@@ -33,3 +29,7 @@ const MyPostsForm: FC<InjectedFormProps<MyPostsFormT>>  = (props) => {
 const MyPostsReduxForm = reduxForm<MyPostsFormT>({ form: "profileMyNewPost" })(MyPostsForm);
 
 export default MyPostsReduxForm;
+
+export type MyPostsFormT = {
+  myNewPost: string
+}

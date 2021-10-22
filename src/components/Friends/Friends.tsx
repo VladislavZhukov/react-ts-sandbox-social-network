@@ -7,18 +7,6 @@ import Friend from "./Friend"
 //my libs
 import Pagination from "../Common/Pagination/Pagination"
 
-type PropsT = {
-  pageSize?: number
-  currentPage: number
-  friendsData: Array<FriendT>
-  totalFriendsCount: number
-  followingInProgress: Array<number>
-
-  follow: (userId: number) => void
-  unfollow: (userId: number) => void
-  onPageChanged: (pageNumber: number) => void
-}
-
 let Friends: FC<PropsT> = ({
   pageSize,
   currentPage,
@@ -54,3 +42,15 @@ let Friends: FC<PropsT> = ({
 }
 
 export default Friends
+
+type PropsT = {
+  pageSize?: number
+  currentPage: number
+  friendsData: Array<FriendT>
+  totalFriendsCount: number
+  followingInProgress: Array<number>
+
+  follow: (userId: number) => void
+  unfollow: (userId: number) => void
+  onPageChanged: (pageNumber: number) => void
+}

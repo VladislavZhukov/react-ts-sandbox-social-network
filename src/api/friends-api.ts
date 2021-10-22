@@ -1,4 +1,4 @@
-import { CommonResponseT, GetItemsT, instance } from "./api"
+import { APIResponseT, GetItemsT, instance } from "./api"
 
 export const friendsAPI = {
     async getUsers(currentPage: number, pageSize: number) {
@@ -6,11 +6,11 @@ export const friendsAPI = {
         return response.data
     },
     async follow(userId: number) {
-        const response = await instance.post<CommonResponseT>(`follow/${userId}`, {})
+        const response = await instance.post<APIResponseT>(`follow/${userId}`, {})
         return response.data
     },
     async unfollow(userId: number) {
-        const response = await instance.delete<CommonResponseT>(`follow/${userId}`, {})
+        const response = await instance.delete<APIResponseT>(`follow/${userId}`, {})
         return response.data;
     }
 }
