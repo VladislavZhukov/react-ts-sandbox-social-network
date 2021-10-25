@@ -14,3 +14,4 @@ export const getTotalFriendsCount = (state: AppStateT) => { return state.friends
 export const getCurrentPage = (state: AppStateT) => { return state.friendsPage.currentPage }
 export const getIsFetching = (state: AppStateT) => { return state.friendsPage.isFetching }
 export const getFollowingInProgress = (state: AppStateT) => { return state.friendsPage.followingInProgress }
+export const getFriendsFilter = (state: AppStateT) => { return state.friendsPage.filter }

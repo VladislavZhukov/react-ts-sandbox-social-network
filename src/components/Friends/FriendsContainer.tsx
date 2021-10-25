@@ -12,6 +12,7 @@ import {
   getAllFriendsData,
   getCurrentPage,
   getFollowingInProgress,
+  getFriendsFilter,
   getIsFetching,
   getPageSize,
   getTotalFriendsCount,
@@ -19,20 +20,25 @@ import {
 //HOC
 import { withAuthRedirect } from "../../hoc/withAuthRedirect"
 //REDUCER
-import { follow, unfollow, getFriends } from "../../redux/friends-reducer"
+import { follow, unfollow, getFriends, FilterSearchT } from "../../redux/friends-reducer"
 //my libs
 import Preloader from "../Common/Preloader/Preloader"
 
 class FriendsContainer extends React.Component<PropsT> {
   componentDidMount() {
-    const { currentPage, pageSize } = this.props
-    this.props.getFriends(currentPage, pageSize)
+    const { currentPage, pageSize, filter } = this.props
+    this.props.getFriends(currentPage, pageSize, filter)
   }
 
   onPageChanged = (pageNumber: number) => {
+    const { pageSize, filter } = this.props
+    this.props.getFriends(pageNumber, pageSize, filter)
+  }
+
+  onFilterChanged = (filter: FilterSearchT) => {
     const { pageSize } = this.props
-    this.props.getFriends(pageNumber, pageSize)
-  };
+    this.props.getFriends(1, pageSize, filter)
+  }
 
   render() {
     return (
@@ -48,6 +54,7 @@ class FriendsContainer extends React.Component<PropsT> {
           unfollow={this.props.unfollow}
           followingInProgress={this.props.followingInProgress}
           onPageChanged={this.onPageChanged}
+          onFilterChanged={this.onFilterChanged}
         />
       </>
     )
@@ -62,6 +69,7 @@ const mapStateToProps = (state: AppStateT): MapStatePropsT => {
     currentPage: getCurrentPage(state),
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
+    filter: getFriendsFilter(state)
   }
 }
 
@@ -85,11 +93,12 @@ type MapStatePropsT = {
   friendsData: Array<FriendT>
   totalFriendsCount: number
   followingInProgress: Array<number>
+  filter: FilterSearchT
 }
 type MapDispatchPropsT = {
   follow: (userId: number) => void
   unfollow: (userId: number) => void
-  getFriends: (currentPage: number, pageSize: number) => void
+  getFriends: (currentPage: number, pageSize: number, filter: FilterSearchT) => void
 }
 type OwnPropsT = {
   pageTitle: string

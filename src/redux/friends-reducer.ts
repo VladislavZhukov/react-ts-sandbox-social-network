@@ -15,7 +15,11 @@ let initialState = {
     totalFriendsCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [] as Array<number> // array of user Id-s
+    followingInProgress: [] as Array<number>, // array of user Id-s
+    filter: {
+        term: '',
+        friend: null as null | boolean
+    }
 }
 
 const friendsReducer = (state = initialState, action: ActionT): InitialStateT => {
@@ -57,6 +61,11 @@ const friendsReducer = (state = initialState, action: ActionT): InitialStateT =>
                     ? [...state.followingInProgress, action.userId]
                     : state.followingInProgress.filter(id => id !== action.userId)
             }
+        case "SN/FRIENDS/SET_FILTER":
+            return {
+                ...state,
+                filter: action.payload
+            }
         default:
             return state;
     }
@@ -71,14 +80,17 @@ export const actions = {
     toggleIsFetching: (isFetching: boolean) => ({ type: "SN/FRIENDS/TOGGLE_IS_FETCHING", isFetching } as const),
     toggleFollowingInProgress: (followingInProgress: boolean, userId: number) => ({
         type: "SN/FRIENDS/TOGGLE_FOLLOWING_IN_PROGRESS", followingInProgress, userId
-    } as const)
+    } as const),
+    setFilter: (filter: FilterSearchT) => ({ type: "SN/FRIENDS/SET_FILTER", payload: filter } as const)
 }
 //ThunkCreator
-export const getFriends = (page: number, pageSize: number): ThunkT => {
+export const getFriends = (page: number, pageSize: number, filter: FilterSearchT): ThunkT => {
     return async (dispatch, getState) => {
         dispatch(actions.setCurrentPage(page))
         dispatch(actions.toggleIsFetching(true))
-        const response = await friendsAPI.getUsers(page, pageSize)
+        debugger
+        dispatch(actions.setFilter(filter))
+        const response = await friendsAPI.getUsers(page, pageSize, filter.term, filter.friend)
         dispatch(actions.toggleIsFetching(false))
         dispatch(actions.setFriends(response.items))
         dispatch(actions.setTotalCount(response.totalCount))
@@ -93,11 +105,6 @@ export const unfollow = (id: number): ThunkT => async (dispatch, getState) => {
 
 export default friendsReducer
 
-export type InitialStateT = typeof initialState
-type ActionT = InferActionsType<typeof actions>
-type DispatchT = Dispatch<ActionT>
-type ThunkT = BaseThunkType<ActionT>
-
 //COMMON FUNCTIONS
 const _followUnfollowFlow = async (dispatch: DispatchT,
     userId: number,
@@ -110,5 +117,11 @@ const _followUnfollowFlow = async (dispatch: DispatchT,
         dispatch(actionCreator(userId))
     }
 }
+
+export type InitialStateT = typeof initialState
+export type FilterSearchT = typeof initialState.filter
+type ActionT = InferActionsType<typeof actions>
+type DispatchT = Dispatch<ActionT>
+type ThunkT = BaseThunkType<ActionT>
 
 
