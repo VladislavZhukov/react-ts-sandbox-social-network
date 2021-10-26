@@ -14,28 +14,6 @@ import { compose } from "redux";
 import { ProfileT } from "../../types/types";
 import { AppStateT } from "../../redux/store-redux";
 
-type MapStateToPropsT = {
-  profile: ProfileT | null,
-  status: string | null,
-  authUserId: number | null,
-  isAuth: boolean
-}
-
-type MapDispatchPropsT = {
-  getProfile: (userId: number | null) => void
-  getStatus: (userId: number | null) => void
-  updateStatus: (status: string) => void
-  savePhoto: (file: File) => void
-  //TODO replace any type
-  saveProfile: (updatedProfile: ProfileT) => any
-}
-
-type PathParamsT = {
-  userId: string
-}
-
-type PropsT = MapStateToPropsT & MapDispatchPropsT & RouteComponentProps<PathParamsT>
-
 class ProfileContainer extends React.Component<PropsT> {
   refreshProfile() {
     let userId: number | null = +this.props.match.params.userId
@@ -88,4 +66,26 @@ export default compose<React.ComponentType>(
   connect<MapStateToPropsT, MapDispatchPropsT, {}, AppStateT>(mapStateToProps, mapDispatchToProps),
   withRouter,
   withAuthRedirect
-)(ProfileContainer);
+)(ProfileContainer)
+
+type MapStateToPropsT = {
+  profile: ProfileT | null,
+  status: string | null,
+  authUserId: number | null,
+  isAuth: boolean
+}
+
+type MapDispatchPropsT = {
+  getProfile: (userId: number | null) => void
+  getStatus: (userId: number | null) => void
+  updateStatus: (status: string) => void
+  savePhoto: (file: File) => void
+  //TODO replace any type
+  saveProfile: (updatedProfile: ProfileT) => any
+}
+
+type PathParamsT = {
+  userId: string
+}
+
+type PropsT = MapStateToPropsT & MapDispatchPropsT & RouteComponentProps<PathParamsT>

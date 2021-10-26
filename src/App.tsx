@@ -15,13 +15,13 @@ import ComposeTest from "./example/2/ComposeTest";
 const News = React.lazy(() => import("./components/News/News"));
 const Music = React.lazy(() => import("./components/Music/Music"));
 const Settings = React.lazy(() => import("./components/Settings/Settings"));
-const LoginContainer = React.lazy(() => import("./components/Login/LoginContainer"));
+const Login = React.lazy(() => import("./components/Login/Login"));
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
-const FriendsContainer = React.lazy(() => import("./components/Friends/FriendsContainer"));
+const FriendsPresentationPage = React.lazy(() => import("./components/Friends/FriendsContainer"));
 
 const SuspendedDialogs = withSuspense(DialogsContainer)
-const SuspendedLogin = withSuspense(LoginContainer)
+const SuspendedLogin = withSuspense(Login)
 const ProfileSuspended = withSuspense(ProfileContainer)
 
 class App extends Component<PropsT> {
@@ -42,7 +42,7 @@ class App extends Component<PropsT> {
           <Route path="/profile/:userId?" render={() => <ProfileSuspended />} />
           <Route exact path="/news" component={withSuspense(News)} />
           <Route path="/dialogs" render={() => <SuspendedDialogs />} />
-          <Route path="/friends" render={withSuspense(() => <FriendsContainer pageTitle={"All Friends =)"} />)} />
+          <Route path="/friends" render={withSuspense(() => <FriendsPresentationPage pageTitle={"All Friends =)"} />)} />
           <Route exact path="/music" component={withSuspense(Music)} />
           <Route exact path="/settings" component={withSuspense(Settings)} />
           <Route path="/login" render={() => <SuspendedLogin />} />

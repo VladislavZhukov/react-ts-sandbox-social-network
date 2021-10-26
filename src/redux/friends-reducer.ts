@@ -88,7 +88,6 @@ export const getFriends = (page: number, pageSize: number, filter: FilterSearchT
     return async (dispatch, getState) => {
         dispatch(actions.setCurrentPage(page))
         dispatch(actions.toggleIsFetching(true))
-        debugger
         dispatch(actions.setFilter(filter))
         const response = await friendsAPI.getUsers(page, pageSize, filter.term, filter.friend)
         dispatch(actions.toggleIsFetching(false))

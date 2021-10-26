@@ -17,7 +17,6 @@ const FriendsSearchForm: FC<PropsT> = memo(({ onFilterChanged }) => {
         friend: string
     }
     const submit = (values: FormSearchT, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
-        debugger
         const filter: FilterSearchT = {
             term: values.term,
             friend: values.friend === 'null' ? null : values.friend === 'true' ? true : false

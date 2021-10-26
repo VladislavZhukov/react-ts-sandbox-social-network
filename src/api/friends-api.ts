@@ -2,7 +2,6 @@ import { APIResponseT, GetItemsT, instance } from "./api"
 
 export const friendsAPI = {
     async getUsers(currentPage: number, pageSize: number, term: string, friend: null | boolean = null) {
-        debugger
         const response = await instance.get<GetItemsT>(`users?page=${currentPage}&count=${pageSize}&term=${term}` +
             (friend === null ? '' : `&friend=${friend}`))
         return response.data

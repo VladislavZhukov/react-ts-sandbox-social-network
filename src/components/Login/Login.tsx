@@ -1,29 +1,23 @@
 //CORE
-import { FC } from "react"
+import { FC, memo } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Redirect } from "react-router"
+import { login } from "../../redux/auth-reducer"
+import { AppStateT } from "../../redux/store-redux"
 //STYLES
 import lm from "./Login.module.css"
 //COMPONENTS
 import LoginReduxForm from "./LoginReduxForm"
 
-type LoginT = {
-  captchaUrl: string | null
-  isAuth: boolean
+const Login: FC<LoginT> = memo(() => {
+  const isAuth = useSelector((state: AppStateT) => state.auth.isAuth)
+  const captchaUrl = useSelector((state: AppStateT) => state.auth.captchaUrl)
 
-  login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
-  logout: () => void
-}
-type LoginFormValueT = {
-  email: string
-  password: string
-  rememberMe: boolean
-  captcha: string
-}
+  const dispatch = useDispatch()
 
-const Login: FC<LoginT> = ({ isAuth, captchaUrl, login, logout }) => {
   const onSubmit = (formData: LoginFormValueT) => {
-    login(formData.email, formData.password, formData.rememberMe, formData.captcha);
-  };
+    dispatch(login(formData.email, formData.password, formData.rememberMe, formData.captcha))
+  }
 
   if (isAuth) {
     return <Redirect to={"/profile"} />;
@@ -34,6 +28,15 @@ const Login: FC<LoginT> = ({ isAuth, captchaUrl, login, logout }) => {
       <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
     </div>
   )
-}
+})
 
-export default Login;
+export default Login
+
+type LoginT = {}
+
+type LoginFormValueT = {
+  email: string
+  password: string
+  rememberMe: boolean
+  captcha: string
+}
