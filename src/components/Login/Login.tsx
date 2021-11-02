@@ -1,8 +1,10 @@
 //CORE
 import { FC, memo } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { Redirect } from "react-router"
+import { useDispatch, useSelector } from "react-redux"
+//REDUX
 import { login } from "../../redux/auth-reducer"
+//TYPES
 import { AppStateT } from "../../redux/store-redux"
 //STYLES
 import lm from "./Login.module.css"

@@ -3,19 +3,17 @@ import { FC } from "react"
 import { NavLink } from "react-router-dom"
 //STYLE
 import nbm from "./NavBar.module.css"
-//TYPES
-import { BestFriendsT } from "../../types/types"
 //COMPONENTS
 import FriendsBar from "./FriendsBar/FriendsBar"
+import { getBestFriends } from "../../redux/navbar-selectors"
+import { useSelector } from "react-redux"
 
-type NavBarT = {
-  friends: Array<BestFriendsT>
-}
+const NavBar: FC = () => {
+  const friends = useSelector(getBestFriends)
 
-const NavBar: FC<NavBarT> = ({ friends }) => {
   let friendsBarElement = friends.map((f) => (
     <FriendsBar key={f.id} name={f.name} />
-  ));
+  ))
 
   return (
     <nav className={nbm.navigation}>
@@ -54,7 +52,7 @@ const NavBar: FC<NavBarT> = ({ friends }) => {
         <div>{friendsBarElement}</div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

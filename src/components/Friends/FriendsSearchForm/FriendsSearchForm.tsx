@@ -1,21 +1,19 @@
+//CORE
 import { Field, Formik } from "formik"
 import { FC, memo } from "react"
+import { useSelector } from "react-redux"
+//TYPES
 import { FilterSearchT } from "../../../redux/friends-reducer"
-
-type PropsT = {
-    onFilterChanged: (filter: FilterSearchT) => void
-}
+//SELECTORS
+import { getFriendsFilter } from "../../../redux/friends-selectors"
 
 const FriendsSearchForm: FC<PropsT> = memo(({ onFilterChanged }) => {
     const friendsSearchFormValidate = (validate: any) => {
         const errors = {}
         return errors
     }
+    const filter = useSelector(getFriendsFilter)
 
-    type FormSearchT = {
-        term: string,
-        friend: string
-    }
     const submit = (values: FormSearchT, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         const filter: FilterSearchT = {
             term: values.term,
@@ -24,10 +22,12 @@ const FriendsSearchForm: FC<PropsT> = memo(({ onFilterChanged }) => {
 
         onFilterChanged(filter)
         setSubmitting(false)
+        
     }
     return (
         <Formik
-            initialValues={{ term: '', friend: 'null' }}
+            enableReinitialize
+            initialValues={{ term: filter.term, friend: String(filter.friend) }}
             validate={friendsSearchFormValidate}
             onSubmit={submit}
         >
@@ -38,8 +38,7 @@ const FriendsSearchForm: FC<PropsT> = memo(({ onFilterChanged }) => {
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
-                /* and other goodies */
+                isSubmitting
             }) => (
                 <form onSubmit={handleSubmit}>
                     <input
@@ -62,6 +61,15 @@ const FriendsSearchForm: FC<PropsT> = memo(({ onFilterChanged }) => {
             )}
         </Formik>
     )
+
+    type FormSearchT = {
+        term: string,
+        friend: string
+    }
 })
 
 export default FriendsSearchForm
+
+type PropsT = {
+    onFilterChanged: (filter: FilterSearchT) => void
+}

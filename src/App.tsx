@@ -2,7 +2,7 @@ import React, { Component, ComponentType, FC } from "react";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import NavBarContainer from "./components/NavBar/NavBarContainer";
+import NavBar from "./components/NavBar/NavBar";
 import { Redirect, withRouter } from "react-router";
 import { connect, Provider } from "react-redux";
 import { compose } from "redux";
@@ -16,11 +16,11 @@ const News = React.lazy(() => import("./components/News/News"));
 const Music = React.lazy(() => import("./components/Music/Music"));
 const Settings = React.lazy(() => import("./components/Settings/Settings"));
 const Login = React.lazy(() => import("./components/Login/Login"));
-const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+const Dialogs = React.lazy(() => import("./components/Dialogs/Dialogs"));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 const FriendsPresentationPage = React.lazy(() => import("./components/Friends/FriendsContainer"));
 
-const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedDialogs = withSuspense(Dialogs)
 const SuspendedLogin = withSuspense(Login)
 const ProfileSuspended = withSuspense(ProfileContainer)
 
@@ -36,7 +36,7 @@ class App extends Component<PropsT> {
     return (
       <div className="app-wrapper">
         <HeaderContainer />
-        <NavBarContainer />
+        <NavBar />
         <div className="app-wrapper-content">
           <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
           <Route path="/profile/:userId?" render={() => <ProfileSuspended />} />
