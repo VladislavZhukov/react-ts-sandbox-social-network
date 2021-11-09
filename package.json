@@ -13,6 +13,7 @@
     "@types/react-js-pagination": "^3.0.4",
     "@types/react-router-dom": "^5.3.2",
     "@types/redux-form": "^8.3.3",
+    "antd": "^4.16.13",
     "axios": "^0.21.1",
     "formik": "^2.2.9",
     "query-string": "^7.0.1",
