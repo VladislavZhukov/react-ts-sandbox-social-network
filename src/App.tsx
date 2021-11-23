@@ -26,11 +26,15 @@ const Dialogs = lazy(() => import("./components/Dialogs/Dialogs"))
 const ProfileContainer = lazy(() => import("./components/Profile/ProfileContainer"))
 const FriendsPresentationPage = lazy(() => import("./components/Friends/FriendsContainer"))
 const ChatPage = lazy(() => import("./pages/Chat/ChatPage"))
+const LearnUseState = lazy(() => import("./example/learnUseState/LearnUseState"))
+const LearnUseEffect = lazy(() => import("./example/learnUseEffect/LearnUseEffect"))
 
 const SuspendedDialogs = withSuspense(Dialogs)
 const SuspendedLogin = withSuspense(Login)
 const SuspendedProfile = withSuspense(ProfileContainer)
 const SuspendedChatPage = withSuspense(ChatPage)
+const SuspendedLearnUseState = withSuspense(LearnUseState)
+const SuspendedLearnUseEffect = withSuspense(LearnUseEffect)
 
 class App extends Component<PropsT> {
   catchAllUnhandError = (e: PromiseRejectionEvent) => {
@@ -73,6 +77,10 @@ class App extends Component<PropsT> {
                 <SubMenu key="sub4" icon={<NotificationOutlined />} title="Settings">
                   <Menu.Item key="7"><Link to="/settings" />Settings</Menu.Item>
                 </SubMenu>
+                <SubMenu key="sub5" icon={<NotificationOutlined />} title="Learn">
+                  <Menu.Item key="8"><Link to="/useState" />useState</Menu.Item>
+                  <Menu.Item key="9"><Link to="/useEffect" />useEffect</Menu.Item>
+                </SubMenu>
               </Menu>
             </Sider>
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
@@ -87,6 +95,8 @@ class App extends Component<PropsT> {
                 <Route path="/login" render={() => <SuspendedLogin />} />
                 <Route path="/test" render={ComposeTest} />
                 <Route path="/chat" render={() => <SuspendedChatPage />} />
+                <Route path="/useState" render={() => <SuspendedLearnUseState />} />
+                <Route path="/useEffect" render={() => <SuspendedLearnUseEffect />} />
                 <Route path="*" render={() => <div>404 NOT FOUND</div>} />
               </Switch>
             </Content>
